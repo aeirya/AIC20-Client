@@ -34,7 +34,8 @@ class AI:
         myself = world.get_me()
         max_ap = world.get_game_constants().max_ap
         # play all of hand once your ap reaches maximum. if ap runs out, putUnit doesn't do anything
-        if myself.ap == max_ap:
+        #! if myself.ap == max_ap:
+        if myself.ap <= max_ap:
             for base_unit in myself.hand:
                 world.put_unit(base_unit=base_unit, path=self.path_for_my_units)
 
