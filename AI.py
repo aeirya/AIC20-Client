@@ -33,11 +33,24 @@ class AI:
         print("turn started:", world.get_current_turn())
         myself = world.get_me()
         max_ap = world.get_game_constants().max_ap
-        # play all of hand once your ap reaches maximum. if ap runs out, putUnit doesn't do anything
-        #! if myself.ap == max_ap:
+
+
+
+
+
+        #? SPAWNING UNITS
+
         if myself.ap <= max_ap:
             for base_unit in myself.hand:
                 world.put_unit(base_unit=base_unit, path=self.path_for_my_units)
+
+        #? SPAWNING UNITS - END
+
+
+
+
+
+        #? USING SPELLS
 
         # this code tries to cast the received spell
         received_spell = world.get_received_spell()
@@ -65,11 +78,21 @@ class AI:
                     cell = path.cells[int((size - 1) / 2)]
                     world.cast_unit_spell(unit=unit, path=path, cell=cell, spell=received_spell)
 
+        #? USING SPELLS - END
+
+
+
+
+
+        #? UPGRADING UNIT
+
         # this code tries to upgrade damage of first unit. in case there's no damage token, it tries to upgrade range
         if len(myself.units) > 0:
             unit = myself.units[0]
             world.upgrade_unit_damage(unit=unit)
             world.upgrade_unit_range(unit=unit)
+
+        #? UPGRADING UNIT - END
 
     # it is called after the game ended and it does not affect the game.
     # using this function you can access the result of the game.
